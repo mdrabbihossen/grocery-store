@@ -4,8 +4,8 @@ class GroceryItem extends StatelessWidget {
   final String itemName;
   final String itemPrice;
   final String imagePath;
-  final Color color;
-  final void Function()? onPressed;
+  final color;
+  final VoidCallback onPressed;
 
   const GroceryItem({
     Key? key,
@@ -18,45 +18,43 @@ class GroceryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: color,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // item image
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              child: Image.asset(
-                imagePath,
-                height: 64,
-              ),
+    return Container(
+      margin: const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: color[100],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // item image
+          Image.asset(
+            imagePath,
+            height: 64,
+          ),
+          // item name
+          Text(
+            itemName,
+            style: const TextStyle(
+              fontSize: 16,
             ),
-            // item name
-            Text(
-              itemName,
+          ),
+          ElevatedButton(
+            onPressed: onPressed,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: color,
+              elevation: 0,
+            ),
+            child: Text(
+              '\$$itemPrice',
               style: const TextStyle(
-                fontSize: 16,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            MaterialButton(
-              onPressed: onPressed,
-              color: color,
-              child: Text(
-                '\$$itemPrice',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

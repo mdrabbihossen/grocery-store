@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_store/model/cart_model.dart';
 import 'package:grocery_store/widgets/grocery_item.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -53,9 +55,26 @@ class _HomeState extends State<Home> {
               ),
             ),
             // recent orders -> show last 3
-            // Expanded(child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), itemBuilder: (context, index) {
-            //   return GroceryItem(itemName: itemName, itemPrice: itemPrice, imagePath: imagePath, color: color, onPressed: onPressed);
-            // },))
+            Expanded(
+                child: Consumer<CartModel>(
+              builder: (context, value, child) => GridView.builder(
+                itemCount: value.shopItems.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1 / 1.2,
+                ),
+                itemBuilder: (context, index) {
+                  final shopItem = value.shopItems[index];
+                  return GroceryItem(
+                    itemName: shopItem[0],
+                    itemPrice: shopItem[1],
+                    imagePath: shopItem[2],
+                    color: shopItem[3],
+                    onPressed: () {},
+                  );
+                },
+              ),
+            )),
           ],
         ),
       ),
