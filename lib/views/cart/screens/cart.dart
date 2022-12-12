@@ -64,14 +64,13 @@ class Cart extends StatelessWidget {
                                   .removeItem(index);
                               // item remove successfully
                               ScaffoldMessenger.of(context).showSnackBar(
-                                 SnackBar(
-                                   duration: const Duration(seconds: 1),
-                                  content: Text("${cartItem[0]} removed successfully"),
+                                SnackBar(
+                                  duration: const Duration(seconds: 1),
+                                  content: Text(
+                                      "${cartItem[0]} removed successfully"),
                                 ),
                               );
-
                             },
-
                             icon: const Icon(Icons.delete),
                           ),
                         ),
@@ -81,6 +80,63 @@ class Cart extends StatelessWidget {
                 ),
               ),
             ),
+
+            // total amount + pay now
+            Padding(
+              padding: const EdgeInsets.all(36.0),
+              child: Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.green,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Total Price',
+                          style: TextStyle(
+                            color: Colors.green[200],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          '\$${value.calculateTotalPrice()}',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.green.shade200),
+                        borderRadius: BorderRadius.circular(28),
+                      ),
+                      child: Row(
+                        children:const [
+                          Text(
+                            'Pay Now',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 16,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         );
       }),
