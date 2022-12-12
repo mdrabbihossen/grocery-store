@@ -16,4 +16,24 @@ class CartModel extends ChangeNotifier {
   get cartItems => _cartItems;
 
   get shopItems => _shopItems;
+
+// add item to cart
+ void addItemToCart(index){
+   _cartItems.add(_shopItems[index]);
+   notifyListeners();
+ }
+
+// remote item from cart
+  void removeItem(index){
+   _cartItems.removeAt(index);
+   notifyListeners();
+  }
+// calculate total price
+  String calculateTotalPrice(){
+    double totalPrice = 0;
+    for (var item in cartItems){
+      totalPrice += double.parse(item[1]);
+    }
+    return totalPrice.toStringAsFixed(2);
+  }
 }

@@ -44,7 +44,7 @@ class GroceryItem extends StatelessWidget {
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
               backgroundColor: color,
-              elevation: 0,
+
             ),
             child: Text(
               '\$$itemPrice',
